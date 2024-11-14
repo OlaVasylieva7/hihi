@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <form id="form">
+    <!-- <form id="form">
       <input
         type="text"
         id="input"
@@ -16,11 +16,14 @@
         autocomplete="off"
       />
       <button id="btn" type="submit">Search</button>
-    </form>
+    </form> -->
+    <h1 class="title">popular movies</h1>
+    <ul class="movies__list"></ul>
 
-    <ul id="list"></ul>
-
-    <button id="load-more__btn" type="button">Load more</button>
+    <div class="pagination__control">
+      <button type="button" class="prev__button">previous</button>
+      <button type="button" class="next__button">next</button>
+    </div>
     <script type="module" src="/main.js"></script>
   </body>
 </html>

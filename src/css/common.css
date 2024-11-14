@@ -1,48 +1,25 @@
 body {
-  margin: 40px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  margin: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 30px;
 }
 
-#form {
-  margin-bottom: 40px;
+.title {
+  text-align: center;
 }
 
-#input {
-  padding: 15px;
-  border: 1px solid grey;
-  margin-right: 10px;
-  outline: none;
-}
-
-#btn {
-  width: 150px;
-  height: 50px;
-  color: #fff;
-  background-color: rgb(2, 2, 78);
-}
-
-#list {
+.movies__list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-
   gap: 20px;
 }
 
-#item {
-  width: 250px;
-  height: 450px;
-
-  overflow: hidden;
-}
-
-#load-more__btn {
-  width: 150px;
-  height: 50px;
-  color: #fff;
-  background-color: rgb(2, 2, 78);
-
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 30px;
-  display: block;
-}
+ button {
+  padding: 10px 20px;
+ }

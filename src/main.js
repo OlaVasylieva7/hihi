@@ -1,49 +1,58 @@
-import NewsApiService from './js/news-service';
+import MovieApiService from "./js/movie-service";
 
-const form = document.querySelector('#form');
-const loadButton = document.querySelector('#load-more__btn');
-const list = document.querySelector('#list');
+const list = document.querySelector(".movies__list");
+const prevBtn = document.querySelector(".prev__button");
+const nextBtn = document.querySelector(".next__button");
 
-const newsApiService = new NewsApiService();
+prevBtn.addEventListener("click", onPrevPage);
+nextBtn.addEventListener("click", onNextPage);
 
-form.addEventListener('submit', onSearch);
-loadButton.addEventListener('click', loadMore);
+const movieApiService = new MovieApiService();
+loadMovies();
 
-function onSearch(e) {
-  e.preventDefault();
-  // clearList();
-  newsApiService.query = e.currentTarget.elements.query.value;
-
-  newsApiService.resetPage();
-
-  newsApiService.fetchArticles().then((articles) => {
-    clearList();
-    renderNews(articles);
-  });
+function loadMovies() {
+  movieApiService
+    .fetchMovies()
+    .then((movies) => renderMovies(movies.slice(0, 8)))
+    .catch((error) => console.error(error));
 }
 
-function loadMore() {
-  newsApiService.fetchArticles().then(renderNews);
+function renderMovies(movies) {
+  const markUp = movies
+    .map(
+      (movie) => `
+  <li class="movie-item">
+          <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" >
+          <h2>${movie.title}</h2>
+          <p>Original language: ${movie.original_language}</p>
+          <p>Release date: ${movie.release_date}</p>
+          <p>Origin country: ${movie.origin_country}</p>
+          <p>Rating: ${movie.vote_average}</p>
+        </li>
+  `
+    )
+    .join("");
+  list.insertAdjacentHTML("beforeend", markUp);
 }
 
-function renderNews(articles) {
-  const markUp = articles.filter(article => 
-    article.title !== "[Removed]" && article.description !== "[Removed]").map(article => {
-    return `<li id="item">
-        <a href="${article.url}" target="_blank" rel="noopener noreferrer">
-        <article>
-        <img src="${article.urlToImage}" alt="" width="480">
-        <h2>${article.title}</h2>
-        <p>Posted by: ${article.author}</p>
-        <p>${article.description}</p>
-        </article>
-        </a>
-        </li>`;
-  }).join('');
-  list.insertAdjacentHTML('beforeend', markUp)
+function onPrevPage() {
+  movieApiService.decrementPage();
+  clearList();
+  loadMovies();
+  toggleButton();
 }
 
+function onNextPage() {
+  movieApiService.incrementPage();
+  clearList();
+  loadMovies();
+  toggleButton();
+}
 
 function clearList() {
   list.innerHTML = "";
+}
+
+function toggleButton() {
+  prevBtn.disabled = movieApiService.page <= 1;
 }
