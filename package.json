@@ -1,11 +1,11 @@
 {
-  "name": "pagination-1",
+  "name": "hihi",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build --base=/pagination-1/",
+    "build": "vite build --base=/hihi/",
     "preview": "vite preview"
   },
   "devDependencies": {
